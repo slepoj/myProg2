@@ -100,110 +100,110 @@ public class Excel {
     public static String int2str(int number) {
         String res = "";
         int k = 1;
-        while (number>0){
-            switch (number/k%26) {
+        while (number > 0) {
+            switch (number / k % 26) {
                 case 1:
-                    number = number/k - 1;
+                    number = number / k - 1;
                     res = "A" + res;
                     break;
                 case 2:
-                    number = number/k - 2;
+                    number = number / k - 2;
                     res = "B" + res;
                     break;
                 case 3:
-                    number = number/k - 3;
+                    number = number / k - 3;
                     res = "C" + res;
                     break;
                 case 4:
-                    number = number/k - 4;
+                    number = number / k - 4;
                     res = "D" + res;
                     break;
                 case 5:
-                    number = number/k - 5;
+                    number = number / k - 5;
                     res = "E" + res;
                     break;
                 case 6:
-                    number = number/k - 6;
+                    number = number / k - 6;
                     res = "F" + res;
                     break;
                 case 7:
-                    number = number/k - 7;
+                    number = number / k - 7;
                     res = "G" + res;
                     break;
                 case 8:
-                    number = number/k - 8;
+                    number = number / k - 8;
                     res = "H" + res;
                     break;
                 case 9:
-                    number = number/k - 9;
+                    number = number / k - 9;
                     res = "I" + res;
                     break;
                 case 10:
-                    number = number/k - 10;
+                    number = number / k - 10;
                     res = "J" + res;
                     break;
                 case 11:
-                    number = number/k - 11;
+                    number = number / k - 11;
                     res = "K" + res;
                     break;
                 case 12:
-                    number = number/k - 12;
+                    number = number / k - 12;
                     res = "L" + res;
                     break;
                 case 13:
-                    number = number/k - 13;
+                    number = number / k - 13;
                     res = "M" + res;
                     break;
                 case 14:
-                    number = number/k - 14;
+                    number = number / k - 14;
                     res = "N" + res;
                     break;
                 case 15:
-                    number = number/k - 15;
+                    number = number / k - 15;
                     res = "O" + res;
                     break;
                 case 16:
-                    number = number/k - 16;
+                    number = number / k - 16;
                     res = "P" + res;
                     break;
                 case 17:
-                    number = number/k - 17;
+                    number = number / k - 17;
                     res = "Q" + res;
                     break;
                 case 18:
-                    number = number/k - 18;
+                    number = number / k - 18;
                     res = "R" + res;
                     break;
                 case 19:
-                    number = number/k - 19;
+                    number = number / k - 19;
                     res = "S" + res;
                     break;
                 case 20:
-                    number = number/k - 20;
+                    number = number / k - 20;
                     res = "T" + res;
                     break;
                 case 21:
-                    number = number/k - 21;
+                    number = number / k - 21;
                     res = "U" + res;
                     break;
                 case 22:
-                    number = number/k - 22;
+                    number = number / k - 22;
                     res = "V" + res;
                     break;
                 case 23:
-                    number = number/k - 23;
+                    number = number / k - 23;
                     res = "W" + res;
                     break;
                 case 24:
-                    number = number/k - 24;
+                    number = number / k - 24;
                     res = "X" + res;
                     break;
                 case 25:
-                    number = number/k - 25;
+                    number = number / k - 25;
                     res = "Y" + res;
                     break;
                 case 0:
-                    number = number/k - 26;
+                    number = number / k - 26;
                     res = "Z" + res;
                     break;
                 default:
@@ -217,7 +217,41 @@ public class Excel {
         return res;
     }
 
-    public static String rightColumn(String number){
-        return int2str(str2int(number)+1);
+    public static String rightColumn(String number) {
+        return int2str(str2int(number) + 1);
+    }
+
+    public static int str2intV2(String number) {
+        int k = 0;
+        int c = 1;
+        int res = 0;
+        for (int i = number.length() - 1; i >= 0; i--) {
+            res += k * ((int) number.charAt(i) - 64) + ((int) number.charAt(i) - 64) * c;
+            if (k == 0) {
+                k = 26;
+                c = 0;
+            } else k *= 26;
+        }
+        return res;
+    }
+
+    public static String int2strV2(int number) {
+        String res = "";
+        int k = 1;
+        int buf = 0;
+        while (number > 0) {
+            if (number / k % 26 != 0) {
+                buf = number / k % 26;
+            } else {
+                buf = 26;
+            }
+            number = number / k - buf;
+            res = ((char) (buf + 64)) + res;
+            if (!res.isEmpty()) {
+                k = 26;
+            }
+
+        }
+        return res;
     }
 }
